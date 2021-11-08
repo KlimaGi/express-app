@@ -28,21 +28,18 @@ app.get(
   (req, res) => console.log("Did you get the right data?")
 );
 
-app.post("/newItem", (req, res) =>
-  res.send(`a post request with /newItem route on port ${PORT}`)
-);
-// update
-app.get(
-  "/images",
-  (req, res) => res.download("images/rocket.jpg")
-  //res.redirect("http://www.google.com")
-  //res.end()
-  //res.send(`a put request with /item route on port ${PORT}`)
-);
-
-app.delete("/item", (req, res) =>
-  res.send(`a delete request with /item route on port ${PORT}`)
-);
+app
+  .route("/item")
+  .get((req, res) => {
+    //res.download("images/rocket.jpg")
+    //res.redirect("http://www.google.com")
+    //res.end()
+    res.send(`a get request with /item route on port ${PORT}`);
+  })
+  .put((req, res) => res.send(`a put request with /item route on port ${PORT}`))
+  .delete((req, res) =>
+    res.send(`a delete request with /item route on port ${PORT}`)
+  );
 
 app.listen(PORT, () => {
   console.log(`Your server is running on port ${PORT}`);
