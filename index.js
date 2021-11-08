@@ -13,6 +13,9 @@ app.use(express.static("public"));
 //app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// This is for proxies
+app.set("trust proxy", "loopback");
+
 // this is for images folder on path images
 app.use("/images", express.static("images"));
 app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
@@ -72,5 +75,4 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`Your server is running on port ${PORT}`);
-  console.log(data);
 });
