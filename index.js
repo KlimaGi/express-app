@@ -7,6 +7,10 @@ const PORT = 3000;
 // this is for the public folder on path /
 app.use(express.static("public"));
 
+// method to use JSON
+//app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // this is for images folder on path images
 app.use("/images", express.static("images"));
 
@@ -15,13 +19,28 @@ app.get("/", (req, res) =>
   res.json(data)
 );
 
+// JSON data
+// {"hello": "JSON is cool"}
+// URLEncoded data
+// hello=URLEncoded+is+cool
+
+app.post("/newItem", (req, res) => {
+  console.log(req.body);
+  res.send(req.body);
+});
+
 app.get(
   "/item/:id",
   (req, res, next) => {
+    // this is the middleware, that pulls the data
     console.log(req.params.id);
     let user = Number(req.params.id);
     console.log(user);
     console.log(data[user]);
+    // middleware that uses the req object
+    console.log(`Request from: ${req.originalUrl}`);
+    console.log(`Request type: ${req.method}`);
+    // everything above is middleware
     res.send(data[user]);
     next();
   },
