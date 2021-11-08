@@ -1,10 +1,9 @@
 import express from "express";
-import favicon from "serve-favicon";
-import path from "path";
+
 import data from "./data/data.json";
 
 const app = express();
-const PORT = 3000;
+const PORT = 3004;
 
 // this is for the public folder on path /
 app.use(express.static("public"));
@@ -18,7 +17,6 @@ app.set("trust proxy", "loopback");
 
 // this is for images folder on path images
 app.use("/images", express.static("images"));
-app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 
 app.get("/", (req, res) =>
   // get data first
